@@ -57,6 +57,61 @@ function DonutChart({ percent }: { percent: number }) {
   );
 }
 
+function ResultSkeleton() {
+  return (
+    <PageWrapper style={{ display: "flex", flexDirection: "column" }}>
+      <CornerLines />
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", flexShrink: 0, position: "relative", zIndex: 10 }}>
+        <div className="skeleton" style={{ width: 120, height: 16 }} />
+        <div className="skeleton" style={{ width: 80, height: 28 }} />
+      </div>
+      <div style={{ padding: "0 24px 20px", flexShrink: 0 }}>
+        <div className="skeleton" style={{ width: 80, height: 10, marginBottom: 10 }} />
+        <div className="skeleton" style={{ width: 260, height: 52, marginBottom: 12 }} />
+        <div className="skeleton" style={{ width: 180, height: 10 }} />
+      </div>
+      <div style={{ flex: 1, display: "flex", padding: "0 24px", overflow: "hidden", minHeight: 0 }}>
+        <div style={{ width: 180, flexShrink: 0, display: "flex", flexDirection: "column", gap: 1, borderRight: "1px solid #d4d4d0" }}>
+          {[0, 1, 2].map(i => (
+            <div key={i} className="skeleton" style={{ height: 72, marginBottom: i < 2 ? 1 : 0 }} />
+          ))}
+        </div>
+        <div style={{ flex: 1, background: "#ebebeb", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: "24px 32px" }}>
+          <div style={{ position: "relative", width: 240, height: 240 }}>
+            <div className="skeleton" style={{ width: 240, height: 240, borderRadius: "50%" }} />
+            <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ width: 170, height: 170, borderRadius: "50%", background: "#ebebeb" }} />
+            </div>
+          </div>
+          <div className="skeleton" style={{ width: 100, height: 14 }} />
+        </div>
+        <div style={{ width: 300, flexShrink: 0, display: "flex", flexDirection: "column", borderLeft: "1px solid #d4d4d0" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid #1a1a1a" }}>
+            <div className="skeleton" style={{ width: 40, height: 10 }} />
+            <div className="skeleton" style={{ width: 90, height: 10 }} />
+          </div>
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 16px", borderBottom: "1px solid #e4e4e0" }}>
+              <div className="skeleton" style={{ width: 100 + (i % 3) * 30, height: 12 }} />
+              <div className="skeleton" style={{ width: 32, height: 12 }} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px", flexShrink: 0 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="skeleton" style={{ width: 38, height: 38 }} />
+          <div className="skeleton" style={{ width: 40, height: 10 }} />
+        </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <div className="skeleton" style={{ width: 80, height: 10 }} />
+          <div className="skeleton" style={{ width: 38, height: 38 }} />
+        </div>
+      </div>
+    </PageWrapper>
+  );
+}
+
 export default function ResultPage() {
   const { push } = useTransitionRouter();
   const [data, setData] = useState<Demographics | null>(null);
@@ -69,13 +124,7 @@ export default function ResultPage() {
     setData(JSON.parse(raw));
   }, [push]);
 
-  if (!data) {
-    return (
-      <div style={{ position: "fixed", inset: 0, background: "#f5f4f0", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: 32, height: 32, border: "2px solid #1a1a1a", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-      </div>
-    );
-  }
+  if (!data) return <ResultSkeleton />;
 
   const entries = toSorted(data[selected]);
   const topLabel = overrides[selected] ?? entries[0].label;
@@ -91,17 +140,15 @@ export default function ResultPage() {
   return (
     <PageWrapper style={{ display: "flex", flexDirection: "column" }}>
       <CornerLines />
-
-      {/* NAV */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.12em", color: "#1a1a1a" }}>SKINSTRIC</span>
           <span style={{ fontSize: 13, fontWeight: 300, letterSpacing: "0.1em", color: "#6b6b6b" }}>[ INTRO ]</span>
         </div>
-        <button style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}>ENTER CODE</button>
+        <button style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+          ENTER CODE
+        </button>
       </div>
-
-      {/* TITLE */}
       <div style={{ padding: "0 24px 20px", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <p style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#1a1a1a", margin: "0 0 4px", fontWeight: 500 }}>A.I. ANALYSIS</p>
         <h1 style={{ fontSize: "clamp(2.6rem, 5vw, 4.2rem)", fontWeight: 800, letterSpacing: "-0.02em", color: "#1a1a1a", lineHeight: 1, margin: 0, textTransform: "uppercase" }}>
@@ -109,11 +156,7 @@ export default function ResultPage() {
         </h1>
         <p style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6b6b6b", margin: "8px 0 0", fontWeight: 400 }}>PREDICTED RACE &amp; AGE &amp; SEX</p>
       </div>
-
-      {/* THREE-COLUMN BODY */}
       <div style={{ flex: 1, display: "flex", padding: "0 24px", overflow: "hidden", position: "relative", zIndex: 5, minHeight: 0 }}>
-
-        {/* LEFT — category cards */}
         <div style={{ width: 180, flexShrink: 0, display: "flex", flexDirection: "column", borderRight: "1px solid #d4d4d0" }}>
           {CATEGORIES.map(cat => {
             const isActive = cat === selected;
@@ -137,16 +180,12 @@ export default function ResultPage() {
             );
           })}
         </div>
-
-        {/* CENTER — donut chart */}
         <div style={{ flex: 1, background: "#ebebeb", display: "flex", flexDirection: "column", padding: "24px 32px", minHeight: 0 }}>
           <p style={{ fontSize: "1.35rem", fontWeight: 300, color: "#1a1a1a", margin: 0 }}>{cap(topLabel)}</p>
           <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <DonutChart key={`${selected}-${topLabel}`} percent={topPercent} />
           </div>
         </div>
-
-        {/* RIGHT — ranked list */}
         <div style={{ width: 300, flexShrink: 0, display: "flex", flexDirection: "column", borderLeft: "1px solid #d4d4d0" }}>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid #1a1a1a", flexShrink: 0 }}>
             <span style={{ fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a", fontWeight: 600 }}>{CAT_LABELS[selected]}</span>
@@ -185,8 +224,6 @@ export default function ResultPage() {
           </div>
         </div>
       </div>
-
-      {/* BOTTOM NAV */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "24px", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <DiamondButton size={38} onClick={() => push("/ai-analysis")}><FiArrowLeft size={13} strokeWidth={1.5} /></DiamondButton>

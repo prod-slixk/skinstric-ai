@@ -38,3 +38,15 @@ body {
   to { transform: rotate(360deg); }
 }
 .spinner { animation: spin 0.8s linear infinite; }
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e8e8e4 25%, #d8d8d4 50%, #e8e8e4 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 0;
+}
