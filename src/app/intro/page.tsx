@@ -4,6 +4,7 @@ import gsap from "gsap";
 import PageWrapper from "@/components/PageWrapper";
 import CornerLines from "@/components/CornerLines";
 import DiamondButton from "@/components/DiamondButton";
+import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
@@ -25,6 +26,7 @@ export default function IntroPage() {
   const [error, setError]       = useState("");
   const [loading, setLoading]   = useState(false);
   const [hover, setHover]       = useState(false);
+  const [showCodeModal, setShowCodeModal] = useState(false);
 
   const inputRef   = useRef<HTMLInputElement>(null);
   const outerRef   = useRef<SVGPolygonElement>(null);
@@ -137,7 +139,10 @@ export default function IntroPage() {
             TO START ANALYSIS
           </span>
         </div>
-        <button style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+        <button
+          onClick={() => setShowCodeModal(true)}
+          style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}
+        >
           ENTER CODE
         </button>
       </div>
@@ -210,6 +215,8 @@ export default function IntroPage() {
           </DiamondButton>
         </div>
       )}
+      {/* ENTER CODE MODAL */}
+      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }

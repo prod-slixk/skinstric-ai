@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import PageWrapper from "@/components/PageWrapper";
 import CornerLines from "@/components/CornerLines";
 import DiamondButton from "@/components/DiamondButton";
+import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 export default function LandingPage() {
   const { push } = useTransitionRouter();
+
+  const [showCodeModal, setShowCodeModal] = useState(false);
 
   const navRef      = useRef<HTMLDivElement>(null);
   const heroRef     = useRef<HTMLHeadingElement>(null);
@@ -98,7 +101,10 @@ export default function LandingPage() {
           <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.12em", color: "#1a1a1a" }}>SKINSTRIC</span>
           <span style={{ fontSize: 13, fontWeight: 300, letterSpacing: "0.1em", color: "#6b6b6b" }}>[ INTRO ]</span>
         </div>
-        <button style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+        <button
+          onClick={() => setShowCodeModal(true)}
+          style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}
+        >
           ENTER CODE
         </button>
       </div>
@@ -175,6 +181,9 @@ export default function LandingPage() {
           WHAT YOUR SKIN NEEDS.
         </p>
       </div>
+
+      {/* ENTER CODE MODAL */}
+      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }
