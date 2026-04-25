@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'>
+  <rect width='1200' height='630' fill='#f5f4f0'/>
+  <!-- grid lines subtle -->
+  <line x1='0' y1='0' x2='200' y2='200' stroke='#1a1a1a' stroke-width='0.6' stroke-dasharray='4 12' opacity='0.25'/>
+  <line x1='1200' y1='0' x2='1000' y2='200' stroke='#1a1a1a' stroke-width='0.6' stroke-dasharray='4 12' opacity='0.25'/>
+  <line x1='0' y1='630' x2='200' y2='430' stroke='#1a1a1a' stroke-width='0.6' stroke-dasharray='4 12' opacity='0.25'/>
+  <line x1='1200' y1='630' x2='1000' y2='430' stroke='#1a1a1a' stroke-width='0.6' stroke-dasharray='4 12' opacity='0.25'/>
+  <!-- diamond -->
+  <polygon points='600,180 780,315 600,450 420,315' fill='none' stroke='#1a1a1a' stroke-width='1.5'/>
+  <polygon points='600,240 700,315 600,390 500,315' fill='none' stroke='#1a1a1a' stroke-width='1' opacity='0.4'/>
+  <polygon points='600,275 640,315 600,355 560,315' fill='#1a1a1a'/>
+  <!-- text -->
+  <text x='600' y='510' text-anchor='middle' font-family='Georgia, serif' font-size='15' letter-spacing='8' fill='#ababab' font-weight='400'>SKINSTRIC</text>
+  <text x='600' y='545' text-anchor='middle' font-family='Georgia, serif' font-size='28' letter-spacing='-0.5' fill='#1a1a1a' font-weight='300'>Sophisticated Skincare A.I.</text>
+</svg>
