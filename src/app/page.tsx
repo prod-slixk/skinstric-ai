@@ -1,188 +1,180 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import PageWrapper from "@/components/PageWrapper";
-import CornerLines from "@/components/CornerLines";
-import DiamondButton from "@/components/DiamondButton";
 import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import PageWrapper from "@/components/PageWrapper";
+
+const L_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
+const R_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png";
 
 export default function LandingPage() {
   const { push } = useTransitionRouter();
-
   const [showCodeModal, setShowCodeModal] = useState(false);
 
-  const navRef      = useRef<HTMLDivElement>(null);
-  const heroRef     = useRef<HTMLHeadingElement>(null);
-  const leftNavRef  = useRef<HTMLDivElement>(null);
-  const rightNavRef = useRef<HTMLDivElement>(null);
-  const bottomRef   = useRef<HTMLDivElement>(null);
+  const headingRef  = useRef<HTMLHeadingElement>(null);
+  const leftRef     = useRef<HTMLDivElement>(null);
+  const rightRef    = useRef<HTMLDivElement>(null);
+  const descRef     = useRef<HTMLDivElement>(null);
 
-  // Entrance animation — simple fade + slight rise, no horizontal offset
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(navRef.current,      { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.5 }, 0.2)
-        .fromTo(heroRef.current,     { opacity: 0, y: 20 },  { opacity: 1, y: 0, duration: 0.7, clearProps: "transform" }, 0.3)
-        .fromTo(leftNavRef.current,  { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.5 }, 0.55)
-        .fromTo(rightNavRef.current, { opacity: 0, x: 20 },  { opacity: 1, x: 0, duration: 0.5 }, 0.65)
-        .fromTo(bottomRef.current,   { opacity: 0 },         { opacity: 1, duration: 0.5 }, 0.85);
+      tl.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.7 }, 0.2)
+        .fromTo(leftRef.current,   { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5)
+        .fromTo(rightRef.current,  { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.6)
+        .fromTo(descRef.current,   { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.8);
     });
     return () => ctx.revert();
   }, []);
 
-  // Hero shifts RIGHT when hovering left nav, LEFT when hovering right nav
-  // Both nav buttons fade out on hover, fade back in on leave
   const shiftHero = (direction: "left" | "right" | "center") => {
-    if (!heroRef.current) return;
-    // Max safe offset = half the remaining space after the text, minus a small margin
-    const heroWidth = heroRef.current.offsetWidth;
-    const offset = Math.max(0, (window.innerWidth - heroWidth) / 2 - 24);
+    if (!headingRef.current) return;
+    const w = headingRef.current.offsetWidth;
+    const offset = Math.max(0, (window.innerWidth - w) / 2 - 32);
     const x = direction === "right" ? offset : direction === "left" ? -offset : 0;
-    const isHovering = direction !== "center";
-
-    gsap.to(heroRef.current, { x, duration: 0.55, ease: "power3.out" });
-    // Hover left → hide right. Hover right → hide left. Leave → restore both.
-    gsap.to(rightNavRef.current, {
-      opacity: direction === "right" ? 0 : 1,
-      duration: 0.3,
-      ease: "power2.out",
-    });
-    gsap.to(leftNavRef.current, {
-      opacity: direction === "left" ? 0 : 1,
-      duration: 0.3,
-      ease: "power2.out",
-    });
+    gsap.to(headingRef.current, { x, duration: 0.5, ease: "power3.out" });
+    gsap.to(rightRef.current, { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
+    gsap.to(leftRef.current,  { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
   };
 
   return (
     <PageWrapper>
-      {/* BACKGROUND VIDEO */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: 0,
-        }}
-      >
-        <source src="/hero-bg.mp4" type="video/mp4" />
-      </video>
-
-      {/* LIGHT OVERLAY — keeps text legible */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "rgba(245, 244, 240, 0.52)",
-          zIndex: 1,
-        }}
-      />
-
-      <CornerLines />
-
       {/* NAV */}
-      <div
-        ref={navRef}
-        style={{
-          position: "absolute", top: 0, left: 0, right: 0,
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          padding: "20px 24px", zIndex: 10, opacity: 0,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.12em", color: "#1a1a1a" }}>SKINSTRIC</span>
-          <span style={{ fontSize: 13, fontWeight: 300, letterSpacing: "0.1em", color: "#6b6b6b" }}>[ INTRO ]</span>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", justifyContent: "space-between", alignItems: "center", height: 64, padding: "0 0", zIndex: 1000 }}>
+        <div style={{ display: "flex", alignItems: "center", transform: "scale(0.75)", transformOrigin: "left center", paddingLeft: 16 }}>
+          <a href="/" style={{ fontWeight: 600, fontSize: 14, letterSpacing: "0.05em", color: "#1A1B1C", textDecoration: "none", padding: "8px 16px" }}>SKINSTRIC</a>
+          <img src={L_BRACKET} alt="[" width={5} height={19} style={{ width: 4, height: 17 }} />
+          <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
+          <img src={R_BRACKET} alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
         <button
           onClick={() => setShowCodeModal(true)}
-          style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}
-        >
-          ENTER CODE
-        </button>
+          style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "pointer", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}
+        >ENTER CODE</button>
       </div>
 
-      {/* LEFT NAV — hover pushes hero RIGHT */}
-      <div
-        ref={leftNavRef}
-        onMouseEnter={() => shiftHero("right")}
-        onMouseLeave={() => shiftHero("center")}
-        style={{
-          position: "absolute", left: 24, top: "50%", transform: "translateY(-50%)",
-          display: "flex", alignItems: "center", gap: 12, zIndex: 10, opacity: 0,
-          cursor: "pointer",
-        }}
-      >
-        <DiamondButton size={40} onClick={() => {}}>
-          <FiArrowLeft size={14} strokeWidth={1.5} />
-        </DiamondButton>
-        <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a" }}>
-          DISCOVER A.I.
-        </span>
-      </div>
-
-      {/* RIGHT NAV — hover pushes hero LEFT */}
-      <div
-        ref={rightNavRef}
-        onMouseEnter={() => shiftHero("left")}
-        onMouseLeave={() => shiftHero("center")}
-        style={{
-          position: "absolute", right: 24, top: "50%", transform: "translateY(-50%)",
-          display: "flex", alignItems: "center", gap: 12, zIndex: 10, opacity: 0,
-          cursor: "pointer",
-        }}
-      >
-        <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a" }}>
-          TAKE TEST
-        </span>
-        <DiamondButton size={40} onClick={() => push("/intro")}>
-          <FiArrowRight size={14} strokeWidth={1.5} />
-        </DiamondButton>
-      </div>
-
-      {/* HERO */}
+      {/* HERO HEADING */}
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none", zIndex: 5 }}>
         <h1
-          ref={heroRef}
+          ref={headingRef}
           style={{
-            fontSize: "clamp(3.5rem, 7vw, 6.5rem)",
-            fontWeight: 300,
-            letterSpacing: "-0.01em",
-            color: "#1a1a1a",
+            fontSize: "clamp(3.5rem, 8vw, 6.25rem)",
+            fontWeight: 400,
+            letterSpacing: "-0.04em",
+            lineHeight: 1,
+            color: "#1A1B1C",
             textAlign: "center",
-            lineHeight: 1.05,
-            userSelect: "none",
             opacity: 0,
+            fontFamily: "Inter, var(--font-dm-sans), system-ui, sans-serif",
+            userSelect: "none",
           }}
         >
-          Sophisticated
-          <br />
-          skincare
+          Sophisticated<br />skincare
         </h1>
       </div>
 
-      {/* BOTTOM DESCRIPTION */}
+      {/* DESCRIPTION — bottom left (desktop) */}
       <div
-        ref={bottomRef}
-        style={{ position: "absolute", bottom: 32, left: 24, zIndex: 10, opacity: 0 }}
+        ref={descRef}
+        style={{ position: "absolute", bottom: "7vh", left: "calc(20vw)", zIndex: 10, opacity: 0 }}
+        className="hidden lg:block"
       >
-        <p style={{ fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.9, color: "#1a1a1a", fontWeight: 400 }}>
-          SKINSTRIC DEVELOPED AN A.I. THAT CREATES
-          <br />
-          A HIGHLY-PERSONALISED ROUTINE TAILORED TO
-          <br />
-          WHAT YOUR SKIN NEEDS.
+        <p style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#1A1B1C", textTransform: "uppercase" }}>
+          Skinstric developed an A.I. that creates a<br />
+          highly-personalized routine tailored to<br />
+          what your skin needs.
         </p>
       </div>
 
-      {/* ENTER CODE MODAL */}
+      {/* LEFT SECTION — DISCOVER A.I. */}
+      <div
+        ref={leftRef}
+        className="hidden lg:block"
+        onMouseEnter={() => shiftHero("right")}
+        onMouseLeave={() => shiftHero("center")}
+        style={{
+          position: "fixed",
+          left: "calc(-53vw)",
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: 500,
+          height: 500,
+          opacity: 0,
+          zIndex: 10,
+        }}
+      >
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          <div style={{ width: "100%", height: "100%", border: "1px dotted #A0A4AB", transform: "rotate(45deg)", position: "fixed", inset: 0 }} />
+          <button
+            className="group"
+            style={{
+              position: "absolute", top: "50%", right: 0,
+              transform: "translateY(-50%) translateX(20%)",
+              display: "inline-flex", alignItems: "center", gap: 16,
+              fontSize: 14, fontWeight: 400, color: "#1A1B1C",
+              background: "none", border: "none", cursor: "pointer",
+              fontFamily: "inherit", padding: "8px 12px",
+            }}
+          >
+            <div style={{ width: 30, height: 30, border: "1px solid #1A1B1C", transform: "rotate(45deg)", flexShrink: 0, transition: "transform 0.3s" }} />
+            <span style={{ position: "absolute", left: 18, top: 9, fontSize: 12, transform: "rotate(180deg)" }}>▶</span>
+            <span>DISCOVER A.I.</span>
+          </button>
+        </div>
+      </div>
+
+      {/* RIGHT SECTION — TAKE TEST */}
+      <div
+        ref={rightRef}
+        className="hidden lg:block"
+        onMouseEnter={() => shiftHero("left")}
+        onMouseLeave={() => shiftHero("center")}
+        style={{
+          position: "fixed",
+          right: "calc(-53vw)",
+          top: "50%",
+          transform: "translateY(-50%)",
+          width: 500,
+          height: 500,
+          opacity: 0,
+          zIndex: 10,
+        }}
+      >
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          <div style={{ width: "100%", height: "100%", border: "1px dotted #A0A4AB", transform: "rotate(45deg)", position: "absolute", inset: 0 }} />
+          <button
+            onClick={() => push("/intro")}
+            style={{
+              position: "absolute", top: "50%", left: 0,
+              transform: "translateY(-50%) translateX(-20%)",
+              display: "inline-flex", alignItems: "center", gap: 16,
+              fontSize: 14, fontWeight: 400, color: "#1A1B1C",
+              background: "none", border: "none", cursor: "pointer",
+              fontFamily: "inherit", padding: "8px 12px",
+            }}
+          >
+            TAKE TEST
+            <div style={{ width: 30, height: 30, border: "1px solid #1A1B1C", transform: "rotate(45deg)", flexShrink: 0 }} />
+            <span style={{ position: "absolute", left: 107, top: 9, fontSize: 12 }}>▶</span>
+          </button>
+        </div>
+      </div>
+
+      {/* MOBILE — description + CTA */}
+      <div className="lg:hidden" style={{ position: "absolute", bottom: 80, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 16, zIndex: 10 }}>
+        <p style={{ fontSize: 14, fontWeight: 600, textAlign: "center", width: "30ch", color: "rgba(26,27,28,0.51)" }}>
+          Skinstric developed an A.I. that creates a highly-personalized routine tailored to what your skin needs.
+        </p>
+        <button
+          onClick={() => push("/intro")}
+          style={{ display: "flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", fontWeight: 700, fontSize: 12 }}
+        >
+          ENTER EXPERIENCE
+          <div style={{ width: 24, height: 24, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
+        </button>
+      </div>
+
       {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );

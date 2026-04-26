@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f5f4f0;
-  --text-primary: #1a1a1a;
+  --bg: #ffffff;
+  --text-primary: #1A1B1C;
   --text-secondary: #6b6b6b;
   --text-muted: #ababab;
   --border-color: #c8c8c4;
-  --font: var(--font-dm-sans), system-ui, sans-serif;
+  --font: Inter, var(--font-dm-sans), system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,6 +18,14 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
 }
+
+/* Spinning diamond animations */
+@keyframes spin-slow    { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spin-slower  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes spin-slowest { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin-slow    { animation: spin-slow    20s linear infinite; }
+.animate-spin-slower  { animation: spin-slower  30s linear infinite; }
+.animate-spin-slowest { animation: spin-slowest 45s linear infinite; }
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }

@@ -87,22 +87,17 @@ export default function SelfiePage() {
       <canvas ref={canvasRef} style={{ display: "none" }} />
 
       {/* ── NAV ── */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", zIndex: 10 }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.12em", color: "#1a1a1a" }}>SKINSTRIC</span>
-            <span style={{ fontSize: 13, fontWeight: 300, letterSpacing: "0.1em", color: "#6b6b6b" }}>[ SELFIE ]</span>
-          </div>
-          <span style={{ fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a", fontWeight: 500 }}>
-            A.I. PHOTO ANALYSIS
-          </span>
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", justifyContent: "space-between", alignItems: "center", height: 64, zIndex: 1000 }}>
+        <div style={{ display: "flex", alignItems: "center", transform: "scale(0.75)", transformOrigin: "left center", paddingLeft: 16 }}>
+          <a href="/" style={{ fontWeight: 600, fontSize: 14, letterSpacing: "0.05em", color: "#1A1B1C", textDecoration: "none", padding: "8px 16px" }}>SKINSTRIC</a>
+          <img src="https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png" alt="[" width={5} height={19} style={{ width: 4, height: 17 }} />
+          <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
+          <img src="https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png" alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
         <button
           onClick={() => setShowCodeModal(true)}
-          style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}
-        >
-          ENTER CODE
-        </button>
+          style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "pointer", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}
+        >ENTER CODE</button>
       </div>
 
       {/* ── DIAMOND ── */}

@@ -37,7 +37,7 @@ export default function PageWrapper({ children, style, ...rest }: PageWrapperPro
       style={{
         position: "fixed",
         inset: 0,
-        background: "#f5f4f0",
+        background: "#ffffff",
         overflow: "hidden",
         fontFamily: "var(--font-dm-sans), system-ui, sans-serif",
         willChange: "transform, opacity",
