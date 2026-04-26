@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import PageWrapper from "@/components/PageWrapper";
 import CornerLines from "@/components/CornerLines";
 import DiamondButton from "@/components/DiamondButton";
+import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import { FiArrowLeft } from "react-icons/fi";
 
@@ -34,6 +35,7 @@ export default function AiAnalysisPage() {
   const [status, setStatus] = useState<UploadState>("idle");
   const [error, setError] = useState("");
   const [hoveredZone, setHoveredZone] = useState<"camera" | "gallery" | null>(null);
+  const [showCodeModal, setShowCodeModal] = useState(false);
 
   const processFile = async (file: File) => {
     if (!file.type.startsWith("image/")) { setError("Please upload an image file."); return; }
@@ -88,7 +90,10 @@ export default function AiAnalysisPage() {
             <span style={{ fontSize: 13, fontWeight: 300, letterSpacing: "0.1em", color: "#6b6b6b" }}>[ INTRO ]</span>
           </div>
         </div>
-        <button style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}>
+        <button
+          onClick={() => setShowCodeModal(true)}
+          style={{ padding: "6px 14px", background: "#1a1a1a", color: "#fff", fontSize: 11, fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", border: "none", cursor: "pointer", fontFamily: "inherit" }}
+        >
           ENTER CODE
         </button>
       </div>
@@ -227,6 +232,9 @@ export default function AiAnalysisPage() {
         </DiamondButton>
         <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a", fontWeight: 500 }}>BACK</span>
       </div>
+
+      {/* ENTER CODE MODAL */}
+      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }
