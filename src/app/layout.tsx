@@ -9,7 +9,7 @@ const dmSans = DM_Sans({
   display: "swap",
 });
 
-const BASE_URL = "https://skinstric.vercel.app";
+const BASE_URL = "https://skinstric-ai-theta.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
