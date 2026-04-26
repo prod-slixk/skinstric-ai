@@ -121,6 +121,22 @@ export default function ResultPage() {
   const [showCodeModal, setShowCodeModal] = useState(false);
 
   useEffect(() => {
+    const pending = sessionStorage.getItem("skinstric_pending_image");
+    if (pending) {
+      fetch("https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
+        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: pending }) })
+        .then(res => { if (!res.ok) throw new Error(); return res.json(); })
+        .then(result => {
+          localStorage.setItem("skinstric_demographics", JSON.stringify(result.data));
+          sessionStorage.removeItem("skinstric_pending_image");
+          setData(result.data);
+        })
+        .catch(() => {
+          sessionStorage.removeItem("skinstric_pending_image");
+          push("/ai-analysis");
+        });
+      return;
+    }
     const raw = localStorage.getItem("skinstric_demographics");
     if (!raw) { push("/ai-analysis"); return; }
     setData(JSON.parse(raw));

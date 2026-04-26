@@ -71,26 +71,10 @@ export default function SelfiePage() {
     setState("idle");
   }, []);
 
-  const submit = useCallback(async () => {
+  const submit = useCallback(() => {
     if (!capturedUrl) return;
-    setState("uploading");
-    try {
-      const res = await fetch(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ image: capturedUrl.split(",")[1] }),
-        }
-      );
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      localStorage.setItem("skinstric_demographics", JSON.stringify(data.data));
-      push("/ai-analysis/result");
-    } catch {
-      setError("Analysis failed — please retake.");
-      setState("error");
-    }
+    sessionStorage.setItem("skinstric_pending_image", capturedUrl.split(",")[1]);
+    push("/ai-analysis/result");
   }, [capturedUrl, push]);
 
   const showIdle    = state === "idle" || state === "error";

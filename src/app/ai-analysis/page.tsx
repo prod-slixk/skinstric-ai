@@ -41,22 +41,13 @@ export default function AiAnalysisPage() {
     if (!file.type.startsWith("image/")) { setError("Please upload an image file."); return; }
     const url = URL.createObjectURL(file);
     setPreview(url);
-    setStatus("uploading");
     setError("");
     try {
       const base64 = await fileToBase64(file);
-      const res = await fetch(
-        "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo",
-        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: base64 }) }
-      );
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      localStorage.setItem("skinstric_demographics", JSON.stringify(data.data));
-      setStatus("success");
-      setTimeout(() => push("/ai-analysis/result"), 700);
+      sessionStorage.setItem("skinstric_pending_image", base64);
+      push("/ai-analysis/result");
     } catch {
-      setStatus("error");
-      setError("Analysis failed. Please try again.");
+      setError("Failed to read image. Please try again.");
     }
   };
 
