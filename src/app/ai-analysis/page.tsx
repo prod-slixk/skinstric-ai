@@ -96,7 +96,7 @@ export default function AiAnalysisPage() {
               <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap" }}>
                 ALLOW A.I.<br />TO SCAN YOUR FACE
               </p>
-              <img src={SCAN_LINE} alt="" style={{ position: "absolute", right: "100%", top: 8, width: 66, height: 59, marginRight: 4, display: "none" }} className="hidden md:block" />
+              <img src={SCAN_LINE} alt="" style={{ position: "absolute", right: "100%", top: 8, width: 66, height: 59, marginRight: 4 }} />
             </div>
           </div>
 
@@ -120,7 +120,7 @@ export default function AiAnalysisPage() {
               <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap" }}>
                 ALLOW A.I.<br />ACCESS GALLERY
               </p>
-              <img src={GALLERY_LINE} alt="" style={{ position: "absolute", left: "100%", bottom: 10, width: 66, height: 59, marginLeft: 4 }} className="hidden md:block" />
+              <img src={GALLERY_LINE} alt="" style={{ position: "absolute", left: "100%", bottom: 10, width: 66, height: 59, marginLeft: 4 }} />
             </div>
           </div>
         </div>

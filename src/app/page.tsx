@@ -4,6 +4,7 @@ import gsap from "gsap";
 import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import PageWrapper from "@/components/PageWrapper";
+import CornerLines from "@/components/CornerLines";
 
 const L_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
 const R_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png";
@@ -19,11 +20,11 @@ export default function LandingPage() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.fromTo(headingRef.current, { opacity: 0 }, { opacity: 1, duration: 0.7 }, 0.2)
-        .fromTo(leftRef.current,    { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.5)
-        .fromTo(rightRef.current,   { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.6)
-        .fromTo(descRef.current,    { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.8);
+      // Only the heading fades in; sidebars + description are immediately visible
+      gsap.fromTo(headingRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.7, ease: "power3.out", delay: 0.2 }
+      );
     });
     return () => ctx.revert();
   }, []);
@@ -40,6 +41,7 @@ export default function LandingPage() {
 
   return (
     <PageWrapper>
+      <CornerLines />
       {/* NAV */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, display: "flex", justifyContent: "space-between", alignItems: "center", height: 64, zIndex: 1000 }}>
         <div style={{ display: "flex", alignItems: "center", transform: "scale(0.75)", transformOrigin: "left center", paddingLeft: 16 }}>
@@ -78,7 +80,7 @@ export default function LandingPage() {
       <div
         ref={descRef}
         className="desktop-only"
-        style={{ position: "absolute", bottom: "7vh", left: "calc(20vw)", zIndex: 10, opacity: 0 }}
+        style={{ position: "absolute", bottom: "7vh", left: "calc(20vw)", zIndex: 10 }}
       >
         <p style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#1A1B1C", textTransform: "uppercase" }}>
           Skinstric developed an A.I. that creates a<br />
@@ -100,7 +102,6 @@ export default function LandingPage() {
           alignItems: "center",
           justifyContent: "flex-end",
           paddingRight: 48,
-          opacity: 0,
           zIndex: 10,
         }}
       >
@@ -133,7 +134,6 @@ export default function LandingPage() {
           alignItems: "center",
           justifyContent: "flex-start",
           paddingLeft: 48,
-          opacity: 0,
           zIndex: 10,
         }}
       >
