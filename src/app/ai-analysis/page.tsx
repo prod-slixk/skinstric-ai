@@ -139,13 +139,13 @@ export default function AiAnalysisPage() {
       )}
 
       {/* BACK */}
-      <div style={{ position: "absolute", bottom: 32, left: 24, display: "flex", alignItems: "center", zIndex: 10 }}>
+      <div style={{ position: "absolute", bottom: 40, left: 24, display: "flex", alignItems: "center", zIndex: 10 }}>
         <button onClick={() => push("/intro")} style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}>
-          <div style={{ position: "relative", width: 48, height: 48, flexShrink: 0 }}>
-            <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg) scale(0.85)" }} />
-            <span style={{ position: "absolute", left: 14, bottom: 12, transform: "rotate(180deg) scale(0.9)", fontSize: 12, lineHeight: 1 }}>&#9654;</span>
+          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+            <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
+            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
-          <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 16, color: "#1A1B1C" }}>BACK</span>
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", marginLeft: 16, color: "#1A1B1C" }}>BACK</span>
         </button>
       </div>
 

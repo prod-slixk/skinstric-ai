@@ -97,9 +97,9 @@ export default function LandingPage() {
         style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: "28%", alignItems: "center", justifyContent: "flex-end", paddingRight: 48, zIndex: 10 }}
       >
         <button style={{ display: "inline-flex", alignItems: "center", gap: 16, fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", color: "#1A1B1C", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
-          <div style={{ position: "relative", width: 30, height: 30, flexShrink: 0 }}>
+          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
-            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 9, lineHeight: 1 }}>&#9654;</span>
+            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
           <span>DISCOVER A.I.</span>
         </button>
@@ -115,9 +115,9 @@ export default function LandingPage() {
       >
         <button onClick={() => push("/intro")} style={{ display: "inline-flex", alignItems: "center", gap: 16, fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", color: "#1A1B1C", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
           <span>TAKE TEST</span>
-          <div style={{ position: "relative", width: 30, height: 30, flexShrink: 0 }}>
+          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
-            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 9, lineHeight: 1 }}>&#9654;</span>
+            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
         </button>
       </div>
@@ -133,7 +133,4 @@ export default function LandingPage() {
         </button>
       </div>
 
-      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
-    </PageWrapper>
-  );
-}
+      {showCodeModal && <EnterCodeModal onClose={() 
