@@ -92,8 +92,8 @@ export default function IntroPage() {
           CLICK TO TYPE
         </p>
 
-        {/* Input — ref: w-[372px] sm:w-[432px], mb-40 pushes content up */}
-        <div style={{ position: "relative", zIndex: 20, marginBottom: 160 }}>
+        {/* Input — centered at true viewport center */}
+        <div style={{ position: "relative", zIndex: 20 }}>
           <input
             ref={inputRef}
             type="text"
