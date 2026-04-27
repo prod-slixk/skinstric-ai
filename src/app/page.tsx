@@ -133,4 +133,7 @@ export default function LandingPage() {
         </button>
       </div>
 
-      {showCodeModal && <EnterCodeModal onClose={() 
+      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
+    </PageWrapper>
+  );
+}
