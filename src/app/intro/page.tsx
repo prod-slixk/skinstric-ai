@@ -1,10 +1,8 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import PageWrapper from "@/components/PageWrapper";
-import DiamondButton from "@/components/DiamondButton";
 import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const L_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
 const R_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png";
@@ -127,10 +125,6 @@ export default function IntroPage() {
           )}
         </div>
 
-        {/* Spinning diamond images — behind input.
-            Each image gets a WRAPPER that handles centering (translate),
-            the img itself only rotates — so the CSS animation never
-            clobbers the translate(-50%,-50%). */}
         <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(320px, 50vw, 762px)", height: "clamp(320px, 50vw, 762px)", pointerEvents: "none" }}>
           <img src={DIAMOND_LARGE} alt="" className="animate-spin-slow" style={{ width: "100%", height: "100%", display: "block" }} />
         </div>
@@ -142,23 +136,30 @@ export default function IntroPage() {
         </div>
       </div>
 
-      {/* BACK */}
-      <div style={{ position: "absolute", bottom: 32, left: 24, display: "flex", alignItems: "center", gap: 12, zIndex: 10 }}>
-        <DiamondButton size={38} onClick={handleBack}><FiArrowLeft size={13} strokeWidth={1.5} /></DiamondButton>
-        <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1A1B1C", fontWeight: 500 }}>BACK</span>
-      </div>
+      {/* BOTTOM NAV */}
+      <div style={{ position: "absolute", bottom: 32, left: 24, right: 24, display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 10 }}>
+        <button onClick={handleBack} style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}>
+          <div style={{ position: "relative", width: 48, height: 48, flexShrink: 0 }}>
+            <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg) scale(0.85)" }} />
+            <span style={{ position: "absolute", left: 14, bottom: 12, transform: "rotate(180deg) scale(0.9)", fontSize: 12, lineHeight: 1 }}>&#9654;</span>
+          </div>
+          <span style={{ fontSize: 14, fontWeight: 600, marginLeft: 16, color: "#1A1B1C" }}>BACK</span>
+        </button>
 
-      {/* PROCEED */}
-      {showProceed && (
-        <div style={{ position: "absolute", bottom: 32, right: 24, display: "flex", alignItems: "center", gap: 12, zIndex: 10 }}>
-          <span style={{ fontSize: 11, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1A1B1C", fontWeight: 500 }}>
-            {loading ? "SENDING..." : "PROCEED"}
-          </span>
-          <DiamondButton size={38} onClick={handleProceed} disabled={loading}>
-            <FiArrowRight size={13} strokeWidth={1.5} />
-          </DiamondButton>
-        </div>
-      )}
+        {showProceed && (
+          <button
+            onClick={handleProceed}
+            disabled={loading}
+            style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit", padding: 0, opacity: loading ? 0.5 : 1 }}
+          >
+            <span style={{ fontSize: 14, fontWeight: 600, marginRight: 16, color: "#1A1B1C" }}>{loading ? "..." : "PROCEED"}</span>
+            <div style={{ position: "relative", width: 48, height: 48, flexShrink: 0 }}>
+              <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg) scale(0.85)" }} />
+              <span style={{ position: "absolute", right: 14, bottom: 12, fontSize: 12, lineHeight: 1 }}>&#9654;</span>
+            </div>
+          </button>
+        )}
+      </div>
 
       {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>

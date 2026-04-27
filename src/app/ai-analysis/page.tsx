@@ -73,13 +73,13 @@ export default function AiAnalysisPage() {
       </div>
 
       {/* TWO DIAMOND CLUSTERS */}
-      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", paddingTop: 64 }}>
-        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", position: "relative", width: "100%", maxWidth: 1100 }}>
+      <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", position: "relative", width: "100%" }}>
 
           {/* LEFT CLUSTER — CAMERA */}
           <div
             onClick={() => push("/selfie")}
-            style={{ position: "relative", width: "clamp(270px, 38vw, 482px)", height: "clamp(270px, 38vw, 482px)", cursor: "pointer", flexShrink: 0, marginRight: "-60px" }}
+            style={{ position: "relative", width: "clamp(260px, 36vw, 460px)", height: "clamp(260px, 36vw, 460px)", cursor: "pointer", flexShrink: 0, marginRight: "-40px" }}
           >
             <img src={RES_LARGE} alt="" className="animate-spin-slow" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animationDelay: "0s" }} />
             <img src={RES_MEDIUM} alt="" className="animate-spin-slower" style={{ position: "absolute", inset: 0, width: "90%", height: "90%", top: "5%", left: "5%", animationDelay: "-4s" }} />
@@ -103,7 +103,7 @@ export default function AiAnalysisPage() {
           {/* RIGHT CLUSTER — GALLERY */}
           <div
             onClick={() => fileInputRef.current?.click()}
-            style={{ position: "relative", width: "clamp(270px, 38vw, 482px)", height: "clamp(270px, 38vw, 482px)", cursor: "pointer", flexShrink: 0, marginLeft: "-60px" }}
+            style={{ position: "relative", width: "clamp(260px, 36vw, 460px)", height: "clamp(260px, 36vw, 460px)", cursor: "pointer", flexShrink: 0, marginLeft: "-40px" }}
           >
             <img src={RES_LARGE} alt="" className="animate-spin-slow" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animationDelay: "-3s" }} />
             <img src={RES_MEDIUM} alt="" className="animate-spin-slower" style={{ position: "absolute", inset: 0, width: "90%", height: "90%", top: "5%", left: "5%", animationDelay: "-10s" }} />
