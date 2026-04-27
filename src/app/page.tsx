@@ -38,7 +38,7 @@ export default function LandingPage() {
 
   return (
     <PageWrapper>
-      {/* Full-viewport rotated box — sides visible as diagonal lines, corners off-screen */}
+      {/* Full-viewport rotated box — corner diamonds per Figma */}
       <div style={{
         position: "fixed", inset: 0, width: "100%", height: "100%",
         border: "1px dotted #A0A4AB", transform: "rotate(45deg)",
@@ -59,15 +59,15 @@ export default function LandingPage() {
         >ENTER CODE</button>
       </div>
 
-      {/* HERO HEADING */}
+      {/* HERO HEADING — Figma: 128px, weight 300, tracking -0.07em, lineHeight 0.94 */}
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none", zIndex: 5 }}>
         <h1
           ref={headingRef}
           style={{
-            fontSize: "clamp(3.5rem, 8vw, 6.25rem)",
-            fontWeight: 400,
-            letterSpacing: "-0.04em",
-            lineHeight: 1,
+            fontSize: "clamp(3.5rem, 8vw, 8rem)",
+            fontWeight: 300,
+            letterSpacing: "-0.07em",
+            lineHeight: 0.94,
             color: "#1A1B1C",
             textAlign: "center",
             opacity: 0,
@@ -79,9 +79,9 @@ export default function LandingPage() {
         </h1>
       </div>
 
-      {/* DESCRIPTION — bottom-left corner, desktop only */}
+      {/* DESCRIPTION — bottom-left, Figma: left 32px, near bottom */}
       <div className="desktop-only" style={{ position: "absolute", bottom: 24, left: 24, zIndex: 10 }}>
-        <p style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#1A1B1C", textTransform: "uppercase" }}>
+        <p style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.7, color: "#1A1B1C", textTransform: "uppercase" }}>
           Skinstric developed an A.I. that creates a<br />
           highly-personalized routine tailored to<br />
           what your skin needs.
@@ -96,12 +96,12 @@ export default function LandingPage() {
         onMouseLeave={() => shiftHero("center")}
         style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: "28%", alignItems: "center", justifyContent: "flex-end", paddingRight: 48, zIndex: 10 }}
       >
-        <button style={{ display: "inline-flex", alignItems: "center", gap: 16, fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", color: "#1A1B1C", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
+        <button style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
           <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
-          <span>DISCOVER A.I.</span>
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>DISCOVER A.I.</span>
         </button>
       </div>
 
@@ -113,8 +113,8 @@ export default function LandingPage() {
         onMouseLeave={() => shiftHero("center")}
         style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: "28%", alignItems: "center", justifyContent: "flex-start", paddingLeft: 48, zIndex: 10 }}
       >
-        <button onClick={() => push("/intro")} style={{ display: "inline-flex", alignItems: "center", gap: 16, fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", color: "#1A1B1C", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
-          <span>TAKE TEST</span>
+        <button onClick={() => push("/intro")} style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
+          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>TAKE TEST</span>
           <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
