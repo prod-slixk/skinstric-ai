@@ -68,3 +68,45 @@ body {
   animation: shimmer 1.4s ease-in-out infinite;
   border-radius: 0;
 }
+
+/* ── AI Analysis: responsive cluster positioning (matches reference) ── */
+.cluster-camera {
+  position: absolute;
+  top: 50%;
+  width: 270px;
+  height: 270px;
+  left: 50%;
+  transform: translate(-100%, -50%);
+  cursor: pointer;
+}
+.cluster-gallery {
+  position: absolute;
+  top: 50%;
+  width: 270px;
+  height: 270px;
+  left: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .cluster-camera  { width: 482px; height: 482px; left: 55%; }
+  .cluster-gallery { width: 482px; height: 482px; left: 45%; }
+}
+@media (min-width: 1024px) {
+  .cluster-camera  { left: 50%; }
+  .cluster-gallery { left: 50%; }
+}
+@media (min-width: 1280px) {
+  .cluster-camera  { left: 40%; }
+  .cluster-gallery { left: 55%; }
+}
+
+/* ── Intro: diamond sizes (matches reference exactly) ── */
+.intro-diamond-lg { width: 480px; height: 480px; }
+.intro-diamond-md { width: 400px; height: 400px; }
+.intro-diamond-sm { width: 320px; height: 320px; }
+@media (min-width: 768px) {
+  .intro-diamond-lg { width: 762px; height: 762px; }
+  .intro-diamond-md { width: 682px; height: 682px; }
+  .intro-diamond-sm { width: 602px; height: 602px; }
+}

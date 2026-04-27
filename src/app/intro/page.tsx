@@ -84,23 +84,23 @@ export default function IntroPage() {
         <p style={{ fontWeight: 600, fontSize: 12, color: "#1A1B1C", textTransform: "uppercase" }}>TO START ANALYSIS</p>
       </div>
 
-      {/* ROTATING DIAMONDS + INPUT */}
+      {/* CENTER AREA — diamonds + input, ref: flex col items-center justify-center mb-40 */}
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", zIndex: 5 }}>
 
-        {/* CLICK TO TYPE label */}
+        {/* CLICK TO TYPE */}
         <p style={{ fontSize: 14, color: "#9ca3af", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4, zIndex: 20, position: "relative" }}>
           CLICK TO TYPE
         </p>
 
-        {/* Input */}
+        {/* Input — ref: w-[372px] sm:w-[432px], mb-40 pushes content up */}
         <div style={{ position: "relative", zIndex: 20, marginBottom: 160 }}>
           <input
             ref={inputRef}
             type="text"
             value={inputVal}
             placeholder={PLACEHOLDERS[step]}
-            onChange={(e) => { setError(""); setInputVal(e.target.value); }}
-            onKeyDown={(e) => { if (e.key === "Enter") handleProceed(); }}
+            onChange={e => { setError(""); setInputVal(e.target.value); }}
+            onKeyDown={e => { if (e.key === "Enter") handleProceed(); }}
             autoComplete="off"
             spellCheck={false}
             style={{
@@ -111,7 +111,7 @@ export default function IntroPage() {
               border: "none",
               borderBottom: "1px solid #1A1B1C",
               outline: "none",
-              width: "clamp(280px, 60vw, 432px)",
+              width: "clamp(372px, 60vw, 432px)",
               letterSpacing: "-0.07em",
               lineHeight: "64px",
               color: "#1A1B1C",
@@ -125,13 +125,14 @@ export default function IntroPage() {
           )}
         </div>
 
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(320px, 50vw, 762px)", height: "clamp(320px, 50vw, 762px)", pointerEvents: "none" }}>
+        {/* Diamonds — ref sizes: 480→762, 400→682, 320→602 (via CSS class breakpoints) */}
+        <div className="intro-diamond-lg" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", pointerEvents: "none" }}>
           <img src={DIAMOND_LARGE} alt="" className="animate-spin-slow" style={{ width: "100%", height: "100%", display: "block" }} />
         </div>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(260px, 42vw, 682px)", height: "clamp(260px, 42vw, 682px)", pointerEvents: "none" }}>
+        <div className="intro-diamond-md" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", pointerEvents: "none" }}>
           <img src={DIAMOND_MEDIUM} alt="" className="animate-spin-slower" style={{ width: "100%", height: "100%", display: "block" }} />
         </div>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(200px, 35vw, 602px)", height: "clamp(200px, 35vw, 602px)", pointerEvents: "none" }}>
+        <div className="intro-diamond-sm" style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", pointerEvents: "none" }}>
           <img src={DIAMOND_SMALL} alt="" className="animate-spin-slowest" style={{ width: "100%", height: "100%", display: "block" }} />
         </div>
       </div>

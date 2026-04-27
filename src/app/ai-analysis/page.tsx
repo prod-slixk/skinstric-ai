@@ -4,9 +4,8 @@ import PageWrapper from "@/components/PageWrapper";
 import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 
-const L_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
-const R_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png";
-
+const L_BRACKET  = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
+const R_BRACKET  = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png";
 const RES_LARGE  = "https://skinstric-wandag.vercel.app/_next/static/media/ResDiamond-large.884fc6a9.png";
 const RES_MEDIUM = "https://skinstric-wandag.vercel.app/_next/static/media/ResDiamond-medium.2224a388.png";
 const RES_SMALL  = "https://skinstric-wandag.vercel.app/_next/static/media/ResDiamond-small.bd0ba7e9.png";
@@ -27,7 +26,7 @@ function fileToBase64(file: File): Promise<string> {
 export default function AiAnalysisPage() {
   const { push } = useTransitionRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [error, setError]               = useState("");
+  const [error, setError]                = useState("");
   const [showCodeModal, setShowCodeModal] = useState(false);
 
   const processFile = async (file: File) => {
@@ -46,9 +45,6 @@ export default function AiAnalysisPage() {
     const file = e.target.files?.[0];
     if (file) processFile(file);
   };
-
-  /* Reference exact sizes: 482px desktop, 270px mobile */
-  const CLUSTER = 482;
 
   return (
     <PageWrapper>
@@ -73,27 +69,22 @@ export default function AiAnalysisPage() {
         <p style={{ fontWeight: 600, fontSize: 12, color: "#1A1B1C", textTransform: "uppercase" }}>TO START ANALYSIS</p>
       </div>
 
-      {/* TWO DIAMOND CLUSTERS — absolute layout matching reference */}
+      {/* CLUSTERS — absolute-positioned, responsive via CSS classes */}
       <div style={{ position: "absolute", inset: 0 }}>
 
-        {/* LEFT CLUSTER — CAMERA: left-[55%] -translate-x-full */}
-        <div
-          onClick={() => push("/selfie")}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "55%",
-            transform: "translate(-100%, -50%)",
-            width: CLUSTER,
-            height: CLUSTER,
-            cursor: "pointer",
-          }}
-        >
-          <img src={RES_LARGE}  alt="" className="animate-spin-slow"    style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
-          <img src={RES_MEDIUM} alt="" className="animate-spin-slower"  style={{ position: "absolute", inset: 0, width: "92%", height: "92%", top: "4%", left: "4%" }} />
-          <img src={RES_SMALL}  alt="" className="animate-spin-slowest" style={{ position: "absolute", inset: 0, width: "84%", height: "84%", top: "8%", left: "8%" }} />
+        {/* ── LEFT / CAMERA ─────────────────────────────────────────
+            ref: md:left-[55%] lg:left-[50%] xl:left-[40%] md:-translate-x-full
+            size: 270 mobile → 482 desktop */}
+        <div className="cluster-camera" onClick={() => push("/selfie")}>
+          {/* placeholder to establish block height in flow */}
+          <div style={{ width: "100%", height: "100%" }} />
 
-          {/* Camera icon */}
+          {/* diamonds — ref sizes: 482 / 444.34 / 405.18 */}
+          <img src={RES_LARGE}  alt="" className="animate-spin-slow"    style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
+          <img src={RES_MEDIUM} alt="" className="animate-spin-slower"  style={{ position: "absolute", inset: 0, width: "92.2%", height: "92.2%", top: "3.9%", left: "3.9%" }} />
+          <img src={RES_SMALL}  alt="" className="animate-spin-slowest" style={{ position: "absolute", inset: 0, width: "84%",   height: "84%",   top: "8%",   left: "8%" }} />
+
+          {/* camera icon — ref: 136px desktop */}
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <img src={CAMERA_ICON} alt="Camera"
               style={{ width: 136, height: 136, transition: "transform 0.7s ease-in-out" }}
@@ -102,34 +93,26 @@ export default function AiAnalysisPage() {
             />
           </div>
 
-          {/* Scan label — top: 30.9%, right: -12px (matches reference exactly) */}
+          {/* scan label — ref: md:top-[30.9%] md:right-[-12px] translate-y-[-20px] */}
           <div style={{ position: "absolute", top: "30.9%", right: -12, transform: "translateY(-20px)", textAlign: "left" }}>
             <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap", marginTop: 4 }}>
               ALLOW A.I.<br />TO SCAN YOUR FACE
             </p>
-            {/* Scan line: right: 143px, top: 20px from label container */}
+            {/* scan line — ref: md:right-[143px] md:top-[20px] */}
             <img src={SCAN_LINE} alt="" style={{ position: "absolute", right: 143, top: 20, width: 66, height: 59 }} />
           </div>
         </div>
 
-        {/* RIGHT CLUSTER — GALLERY: left-[45%] */}
-        <div
-          onClick={() => fileInputRef.current?.click()}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "45%",
-            transform: "translateY(-50%)",
-            width: CLUSTER,
-            height: CLUSTER,
-            cursor: "pointer",
-          }}
-        >
-          <img src={RES_LARGE}  alt="" className="animate-spin-slow"    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animationDelay: "-3s" }} />
-          <img src={RES_MEDIUM} alt="" className="animate-spin-slower"  style={{ position: "absolute", inset: 0, width: "92%", height: "92%", top: "4%", left: "4%", animationDelay: "-10s" }} />
-          <img src={RES_SMALL}  alt="" className="animate-spin-slowest" style={{ position: "absolute", inset: 0, width: "84%", height: "84%", top: "8%", left: "8%", animationDelay: "-5s" }} />
+        {/* ── RIGHT / GALLERY ────────────────────────────────────────
+            ref: md:left-[45%] lg:left-[50%] xl:left-[55%] */}
+        <div className="cluster-gallery" onClick={() => fileInputRef.current?.click()}>
+          <div style={{ width: "100%", height: "100%" }} />
 
-          {/* Gallery icon */}
+          <img src={RES_LARGE}  alt="" className="animate-spin-slow"    style={{ position: "absolute", inset: 0, width: "100%", height: "100%", animationDelay: "-3s" }} />
+          <img src={RES_MEDIUM} alt="" className="animate-spin-slower"  style={{ position: "absolute", inset: 0, width: "92.2%", height: "92.2%", top: "3.9%", left: "3.9%", animationDelay: "-10s" }} />
+          <img src={RES_SMALL}  alt="" className="animate-spin-slowest" style={{ position: "absolute", inset: 0, width: "84%",   height: "84%",   top: "8%",   left: "8%",   animationDelay: "-5s" }} />
+
+          {/* gallery icon */}
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <img src={GALLERY_ICON} alt="Gallery"
               style={{ width: 136, height: 136, transition: "transform 0.7s ease-in-out" }}
@@ -138,25 +121,24 @@ export default function AiAnalysisPage() {
             />
           </div>
 
-          {/* Gallery label — top: 70%, left: 17px (matches reference exactly) */}
+          {/* gallery label — ref: md:top-[70%] md:left-[17px] translate-y-[-10px] */}
           <div style={{ position: "absolute", top: "70%", left: 17, transform: "translateY(-10px)", textAlign: "right" }}>
             <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap", marginTop: 8 }}>
               ALLOW A.I.<br />ACCESS GALLERY
             </p>
-            {/* Gallery line: left: 120px, bottom: 39px from label container */}
+            {/* gallery line — ref: md:left-[120px] md:bottom-[39px] */}
             <img src={GALLERY_LINE} alt="" style={{ position: "absolute", left: 120, bottom: 39, width: 66, height: 59 }} />
           </div>
         </div>
       </div>
 
-      {/* Error */}
       {error && (
         <div style={{ position: "absolute", bottom: 80, left: 0, right: 0, textAlign: "center", zIndex: 10 }}>
           <span style={{ fontSize: 11, color: "#c0392b" }}>{error}</span>
         </div>
       )}
 
-      {/* BACK — reference style button */}
+      {/* BACK */}
       <div style={{ position: "absolute", bottom: 32, left: 24, display: "flex", alignItems: "center", zIndex: 10 }}>
         <button onClick={() => push("/intro")} style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}>
           <div style={{ position: "relative", width: 48, height: 48, flexShrink: 0 }}>
