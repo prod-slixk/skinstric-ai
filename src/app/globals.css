@@ -47,6 +47,16 @@ body {
 }
 .spinner { animation: spin 0.8s linear infinite; }
 
+/* Responsive utilities (reliable cross-browser, no Tailwind JIT needed) */
+.desktop-only      { display: none !important; }
+.desktop-flex-only { display: none !important; }
+.mobile-only       { display: flex !important; }
+@media (min-width: 1024px) {
+  .desktop-only      { display: block !important; }
+  .desktop-flex-only { display: flex  !important; }
+  .mobile-only       { display: none  !important; }
+}
+
 /* Skeleton shimmer */
 @keyframes shimmer {
   0%   { background-position: -600px 0; }

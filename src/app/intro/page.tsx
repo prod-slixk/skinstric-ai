@@ -127,25 +127,19 @@ export default function IntroPage() {
           )}
         </div>
 
-        {/* Spinning diamond images — behind input */}
-        <img
-          src={DIAMOND_LARGE}
-          alt="Diamond Large"
-          className="animate-spin-slow"
-          style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(190deg)", width: "clamp(320px, 50vw, 762px)", height: "clamp(320px, 50vw, 762px)", pointerEvents: "none" }}
-        />
-        <img
-          src={DIAMOND_MEDIUM}
-          alt="Diamond Medium"
-          className="animate-spin-slower"
-          style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(185deg)", width: "clamp(260px, 42vw, 682px)", height: "clamp(260px, 42vw, 682px)", pointerEvents: "none" }}
-        />
-        <img
-          src={DIAMOND_SMALL}
-          alt="Diamond Small"
-          className="animate-spin-slowest"
-          style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(200px, 35vw, 602px)", height: "clamp(200px, 35vw, 602px)", pointerEvents: "none" }}
-        />
+        {/* Spinning diamond images — behind input.
+            Each image gets a WRAPPER that handles centering (translate),
+            the img itself only rotates — so the CSS animation never
+            clobbers the translate(-50%,-50%). */}
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(320px, 50vw, 762px)", height: "clamp(320px, 50vw, 762px)", pointerEvents: "none" }}>
+          <img src={DIAMOND_LARGE} alt="" className="animate-spin-slow" style={{ width: "100%", height: "100%", display: "block" }} />
+        </div>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(260px, 42vw, 682px)", height: "clamp(260px, 42vw, 682px)", pointerEvents: "none" }}>
+          <img src={DIAMOND_MEDIUM} alt="" className="animate-spin-slower" style={{ width: "100%", height: "100%", display: "block" }} />
+        </div>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "clamp(200px, 35vw, 602px)", height: "clamp(200px, 35vw, 602px)", pointerEvents: "none" }}>
+          <img src={DIAMOND_SMALL} alt="" className="animate-spin-slowest" style={{ width: "100%", height: "100%", display: "block" }} />
+        </div>
       </div>
 
       {/* BACK */}
