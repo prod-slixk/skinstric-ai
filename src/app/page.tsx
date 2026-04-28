@@ -44,6 +44,11 @@ export default function LandingPage() {
     gsap.to(rightCornerRef.current, { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
     gsap.to(leftRef.current,        { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
     gsap.to(leftCornerRef.current,  { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
+
+    // Hovered button diamond pops slightly
+    const pop = 1.35;
+    gsap.to(leftDiamRef.current,  { scale: direction === "right" ? pop : 1, duration: 0.3, ease: "back.out(1.5)" });
+    gsap.to(rightDiamRef.current, { scale: direction === "left"  ? pop : 1, duration: 0.3, ease: "back.out(1.5)" });
   };
 
   return (
