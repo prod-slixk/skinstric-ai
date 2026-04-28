@@ -12,9 +12,11 @@ export default function LandingPage() {
   const { push } = useTransitionRouter();
   const [showCodeModal, setShowCodeModal] = useState(false);
 
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const leftRef    = useRef<HTMLDivElement>(null);
-  const rightRef   = useRef<HTMLDivElement>(null);
+  const headingRef    = useRef<HTMLHeadingElement>(null);
+  const leftRef       = useRef<HTMLDivElement>(null);
+  const rightRef      = useRef<HTMLDivElement>(null);
+  const leftDiamRef   = useRef<HTMLDivElement>(null);
+  const rightDiamRef  = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -31,17 +33,45 @@ export default function LandingPage() {
     const w = headingRef.current.offsetWidth;
     const offset = Math.max(0, (window.innerWidth - w) / 2 - 48);
     const x = direction === "right" ? offset : direction === "left" ? -offset : 0;
+
+    // Hero text shift
     gsap.to(headingRef.current, { x, duration: 0.5, ease: "power3.out" });
+
+    // Side panel fade
     gsap.to(rightRef.current, { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
     gsap.to(leftRef.current,  { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
+
+    // Button diamond expansion — 44px default → 78px hovered (per Figma frame 001)
+    const expandScale = 78 / 44; // ≈ 1.773
+    gsap.to(rightDiamRef.current, {
+      scale: direction === "left"   ? expandScale : 1,
+      duration: 0.35, ease: "power2.out",
+    });
+    gsap.to(leftDiamRef.current, {
+      scale: direction === "right"  ? expandScale : 1,
+      duration: 0.35, ease: "power2.out",
+    });
   };
 
   return (
     <PageWrapper>
-      {/* Full-viewport rotated box — corner diamonds per Figma */}
+      {/*
+        CORNER DIAMONDS — Figma: two 602px diamonds, each centered on the
+        left/right viewport edge so exactly half is visible on-screen.
+        translate(±50%, -50%) achieves this without fixed pixel values.
+      */}
       <div style={{
-        position: "fixed", inset: 0, width: "100%", height: "100%",
-        border: "1px dotted #A0A4AB", transform: "rotate(45deg)",
+        position: "fixed", left: 0, top: "50%",
+        width: "31.35vw", height: "31.35vw",   /* 602/1920 = 31.35% */
+        border: "1px dotted #A0A4AB",
+        transform: "translate(-50%, -50%) rotate(45deg)",
+        pointerEvents: "none", zIndex: 1,
+      }} />
+      <div style={{
+        position: "fixed", right: 0, top: "50%",
+        width: "31.35vw", height: "31.35vw",
+        border: "1px dotted #A0A4AB",
+        transform: "translate(50%, -50%) rotate(45deg)",
         pointerEvents: "none", zIndex: 1,
       }} />
 
@@ -59,7 +89,7 @@ export default function LandingPage() {
         >ENTER CODE</button>
       </div>
 
-      {/* HERO HEADING — Figma: 128px, weight 300, tracking -0.07em, lineHeight 0.94 */}
+      {/* HERO — Figma: 128px, weight 300, tracking -0.07em, lineHeight 0.94, vertically centered */}
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", pointerEvents: "none", zIndex: 5 }}>
         <h1
           ref={headingRef}
@@ -79,25 +109,35 @@ export default function LandingPage() {
         </h1>
       </div>
 
-      {/* DESCRIPTION — bottom-left, Figma: left 32px, near bottom */}
-      <div className="desktop-only" style={{ position: "absolute", bottom: 24, left: 24, zIndex: 10 }}>
-        <p style={{ fontSize: 14, fontWeight: 400, lineHeight: 1.7, color: "#1A1B1C", textTransform: "uppercase" }}>
+      {/* DESCRIPTION — Figma: left 32px, top 862/960 ≈ bottom 26px */}
+      <div className="desktop-only" style={{ position: "absolute", bottom: 26, left: 32, zIndex: 10 }}>
+        <p style={{ fontSize: 14, fontWeight: 400, lineHeight: "24px", color: "#1A1B1C", textTransform: "uppercase" }}>
           Skinstric developed an A.I. that creates a<br />
           highly-personalized routine tailored to<br />
           what your skin needs.
         </p>
       </div>
 
-      {/* LEFT HOVER ZONE — DISCOVER A.I. (desktop only) */}
+      {/*
+        LEFT HOVER ZONE — DISCOVER A.I.
+        Figma: button at top:458/960 = 47.7% from top.
+        Using paddingTop to bias slightly above center.
+      */}
       <div
         ref={leftRef}
         className="desktop-flex-only"
         onMouseEnter={() => shiftHero("right")}
         onMouseLeave={() => shiftHero("center")}
-        style={{ position: "fixed", left: 0, top: 0, bottom: 0, width: "28%", alignItems: "center", justifyContent: "flex-end", paddingRight: 48, zIndex: 10 }}
+        style={{
+          position: "fixed", left: 0, top: 0, bottom: 0, width: "28%",
+          alignItems: "center", justifyContent: "flex-end", paddingRight: 48,
+          paddingTop: "5vh",   /* nudge to ~47.7% from top */
+          zIndex: 10,
+        }}
       >
         <button style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
-          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+          {/* Diamond — ref to animate scale on hover */}
+          <div ref={leftDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
@@ -105,24 +145,30 @@ export default function LandingPage() {
         </button>
       </div>
 
-      {/* RIGHT HOVER ZONE — TAKE TEST (desktop only) */}
+      {/* RIGHT HOVER ZONE — TAKE TEST */}
       <div
         ref={rightRef}
         className="desktop-flex-only"
         onMouseEnter={() => shiftHero("left")}
         onMouseLeave={() => shiftHero("center")}
-        style={{ position: "fixed", right: 0, top: 0, bottom: 0, width: "28%", alignItems: "center", justifyContent: "flex-start", paddingLeft: 48, zIndex: 10 }}
+        style={{
+          position: "fixed", right: 0, top: 0, bottom: 0, width: "28%",
+          alignItems: "center", justifyContent: "flex-start", paddingLeft: 48,
+          paddingTop: "5vh",
+          zIndex: 10,
+        }}
       >
         <button onClick={() => push("/intro")} style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
           <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>TAKE TEST</span>
-          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+          {/* Diamond — ref to animate scale on hover */}
+          <div ref={rightDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
         </button>
       </div>
 
-      {/* MOBILE — description + CTA */}
+      {/* MOBILE */}
       <div className="mobile-only" style={{ position: "absolute", bottom: 80, left: 0, right: 0, flexDirection: "column", alignItems: "center", gap: 16, zIndex: 10 }}>
         <p style={{ fontSize: 14, fontWeight: 600, textAlign: "center", width: "30ch", color: "rgba(26,27,28,0.51)" }}>
           Skinstric developed an A.I. that creates a highly-personalized routine tailored to what your skin needs.
