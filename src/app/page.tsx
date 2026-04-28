@@ -39,16 +39,11 @@ export default function LandingPage() {
     // Hero text shift
     gsap.to(headingRef.current, { x, duration: 0.5, ease: "power3.out" });
 
-    // Hovered side (button + corner diamond) fades — opposite side stays visible
-    gsap.to(leftRef.current,        { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
-    gsap.to(leftCornerRef.current,  { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
-    gsap.to(rightRef.current,       { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
-    gsap.to(rightCornerRef.current, { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
-
-    // Subtle scale on the opposite (still-visible) button diamond
-    const expandScale = 1.15;
-    gsap.to(leftDiamRef.current,  { scale: direction === "left"  ? expandScale : 1, duration: 0.35, ease: "power2.out" });
-    gsap.to(rightDiamRef.current, { scale: direction === "right" ? expandScale : 1, duration: 0.35, ease: "power2.out" });
+    // Opposite side (button + corner diamond) fades on hover
+    gsap.to(rightRef.current,       { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
+    gsap.to(rightCornerRef.current, { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
+    gsap.to(leftRef.current,        { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
+    gsap.to(leftCornerRef.current,  { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
   };
 
   return (
@@ -144,7 +139,7 @@ export default function LandingPage() {
           whiteSpace: "nowrap",
         }}
       >
-        <div ref={leftDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
+        <div ref={leftDiamRef} style={{ position: "relative", width: 32, height: 32, flexShrink: 0, transformOrigin: "center center" }}>
           <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
           <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
         </div>
@@ -179,7 +174,7 @@ export default function LandingPage() {
         }}
       >
         <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>TAKE TEST</span>
-        <div ref={rightDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
+        <div ref={rightDiamRef} style={{ position: "relative", width: 32, height: 32, flexShrink: 0, transformOrigin: "center center" }}>
           <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
           <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
         </div>
