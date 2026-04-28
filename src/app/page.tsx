@@ -12,11 +12,13 @@ export default function LandingPage() {
   const { push } = useTransitionRouter();
   const [showCodeModal, setShowCodeModal] = useState(false);
 
-  const headingRef    = useRef<HTMLHeadingElement>(null);
-  const leftRef       = useRef<HTMLButtonElement>(null);
-  const rightRef      = useRef<HTMLButtonElement>(null);
-  const leftDiamRef   = useRef<HTMLDivElement>(null);
-  const rightDiamRef  = useRef<HTMLDivElement>(null);
+  const headingRef       = useRef<HTMLHeadingElement>(null);
+  const leftRef          = useRef<HTMLButtonElement>(null);
+  const rightRef         = useRef<HTMLButtonElement>(null);
+  const leftDiamRef      = useRef<HTMLDivElement>(null);
+  const rightDiamRef     = useRef<HTMLDivElement>(null);
+  const leftCornerRef    = useRef<HTMLDivElement>(null);
+  const rightCornerRef   = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -37,20 +39,16 @@ export default function LandingPage() {
     // Hero text shift
     gsap.to(headingRef.current, { x, duration: 0.5, ease: "power3.out" });
 
-    // Side panel fade
-    gsap.to(rightRef.current, { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
-    gsap.to(leftRef.current,  { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
+    // Hovered side (button + corner diamond) fades — opposite side stays visible
+    gsap.to(leftRef.current,        { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
+    gsap.to(leftCornerRef.current,  { opacity: direction === "right" ? 0 : 1, duration: 0.3 });
+    gsap.to(rightRef.current,       { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
+    gsap.to(rightCornerRef.current, { opacity: direction === "left"  ? 0 : 1, duration: 0.3 });
 
-    // Button diamond expansion — 44px default → 78px hovered (per Figma frame 001)
-    const expandScale = 78 / 44; // ≈ 1.773
-    gsap.to(rightDiamRef.current, {
-      scale: direction === "left"   ? expandScale : 1,
-      duration: 0.35, ease: "power2.out",
-    });
-    gsap.to(leftDiamRef.current, {
-      scale: direction === "right"  ? expandScale : 1,
-      duration: 0.35, ease: "power2.out",
-    });
+    // Subtle scale on the opposite (still-visible) button diamond
+    const expandScale = 1.15;
+    gsap.to(leftDiamRef.current,  { scale: direction === "left"  ? expandScale : 1, duration: 0.35, ease: "power2.out" });
+    gsap.to(rightDiamRef.current, { scale: direction === "right" ? expandScale : 1, duration: 0.35, ease: "power2.out" });
   };
 
   return (
@@ -60,14 +58,14 @@ export default function LandingPage() {
         left/right viewport edge so exactly half is visible on-screen.
         translate(±50%, -50%) achieves this without fixed pixel values.
       */}
-      <div style={{
+      <div ref={leftCornerRef} style={{
         position: "fixed", left: 0, top: "50%",
         width: "31.35vw", height: "31.35vw",   /* 602/1920 = 31.35% */
         border: "1px dotted #A0A4AB",
         transform: "translate(-50%, -50%) rotate(45deg)",
         pointerEvents: "none", zIndex: 1,
       }} />
-      <div style={{
+      <div ref={rightCornerRef} style={{
         position: "fixed", right: 0, top: "50%",
         width: "31.35vw", height: "31.35vw",
         border: "1px dotted #A0A4AB",
@@ -96,8 +94,8 @@ export default function LandingPage() {
           style={{
             fontSize: "clamp(3.5rem, 8vw, 8rem)",
             fontWeight: 300,
-            letterSpacing: "-0.07em",
-            lineHeight: 0.94,
+            letterSpacing: "-0.09em",
+            lineHeight: 0.88,
             color: "#1A1B1C",
             textAlign: "center",
             opacity: 0,
