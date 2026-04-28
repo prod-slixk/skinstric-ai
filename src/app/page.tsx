@@ -13,8 +13,8 @@ export default function LandingPage() {
   const [showCodeModal, setShowCodeModal] = useState(false);
 
   const headingRef    = useRef<HTMLHeadingElement>(null);
-  const leftRef       = useRef<HTMLDivElement>(null);
-  const rightRef      = useRef<HTMLDivElement>(null);
+  const leftRef       = useRef<HTMLButtonElement>(null);
+  const rightRef      = useRef<HTMLButtonElement>(null);
   const leftDiamRef   = useRef<HTMLDivElement>(null);
   const rightDiamRef  = useRef<HTMLDivElement>(null);
 
@@ -119,54 +119,73 @@ export default function LandingPage() {
       </div>
 
       {/*
-        LEFT HOVER ZONE — DISCOVER A.I.
-        Figma: button at top:458/960 = 47.7% from top.
-        Using paddingTop to bias slightly above center.
+        LEFT BUTTON — DISCOVER A.I.
+        Centered within the visible half of the left diamond.
+        Diamond is 31.35vw wide, centered on left edge → visible half extends ~22.17vw.
+        Button center placed at 11vw from left (midpoint of visible half), top 50%.
+        Hover fires only on the button itself.
       */}
-      <div
+      <button
         ref={leftRef}
         className="desktop-flex-only"
         onMouseEnter={() => shiftHero("right")}
         onMouseLeave={() => shiftHero("center")}
         style={{
-          position: "fixed", left: 0, top: 0, bottom: 0, width: "28%",
-          alignItems: "center", justifyContent: "flex-end", paddingRight: 48,
-          paddingTop: "5vh",   /* nudge to ~47.7% from top */
+          position: "fixed",
+          left: "11vw",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          alignItems: "center",
+          gap: 16,
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontFamily: "inherit",
+          padding: "8px 0",
           zIndex: 10,
+          whiteSpace: "nowrap",
         }}
       >
-        <button style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
-          {/* Diamond — ref to animate scale on hover */}
-          <div ref={leftDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
-            <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
-            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
-          </div>
-          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>DISCOVER A.I.</span>
-        </button>
-      </div>
+        <div ref={leftDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
+          <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
+          <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
+        </div>
+        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>DISCOVER A.I.</span>
+      </button>
 
-      {/* RIGHT HOVER ZONE — TAKE TEST */}
-      <div
+      {/*
+        RIGHT BUTTON — TAKE TEST
+        Centered within the visible half of the right diamond.
+        Button center at 89vw from left (= 11vw from right edge), top 50%.
+      */}
+      <button
         ref={rightRef}
         className="desktop-flex-only"
         onMouseEnter={() => shiftHero("left")}
         onMouseLeave={() => shiftHero("center")}
+        onClick={() => push("/intro")}
         style={{
-          position: "fixed", right: 0, top: 0, bottom: 0, width: "28%",
-          alignItems: "center", justifyContent: "flex-start", paddingLeft: 48,
-          paddingTop: "5vh",
+          position: "fixed",
+          left: "89vw",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          alignItems: "center",
+          gap: 16,
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          fontFamily: "inherit",
+          padding: "8px 0",
           zIndex: 10,
+          whiteSpace: "nowrap",
         }}
       >
-        <button onClick={() => push("/intro")} style={{ display: "inline-flex", alignItems: "center", gap: 16, background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: "8px 0" }}>
-          <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>TAKE TEST</span>
-          {/* Diamond — ref to animate scale on hover */}
-          <div ref={rightDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
-            <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
-            <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
-          </div>
-        </button>
-      </div>
+        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.02em", color: "#1A1B1C", opacity: 0.7 }}>TAKE TEST</span>
+        <div ref={rightDiamRef} style={{ position: "relative", width: 44, height: 44, flexShrink: 0, transformOrigin: "center center" }}>
+          <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
+          <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
+        </div>
+      </button>
 
       {/* MOBILE */}
       <div className="mobile-only" style={{ position: "absolute", bottom: 80, left: 0, right: 0, flexDirection: "column", alignItems: "center", gap: 16, zIndex: 10 }}>
