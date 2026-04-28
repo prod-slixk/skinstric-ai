@@ -1,7 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
 import PageWrapper from "@/components/PageWrapper";
-import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 
 const L_BRACKET  = "https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202710.61a74ed4.png";
@@ -27,8 +26,6 @@ export default function AiAnalysisPage() {
   const { push } = useTransitionRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [error, setError]                = useState("");
-  const [showCodeModal, setShowCodeModal] = useState(false);
-
   const processFile = async (file: File) => {
     if (!file.type.startsWith("image/")) { setError("Please upload an image file."); return; }
     setError("");
@@ -58,10 +55,6 @@ export default function AiAnalysisPage() {
           <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
           <img src={R_BRACKET} alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
-        <button
-          onClick={() => setShowCodeModal(true)}
-          style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "pointer", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}
-        >ENTER CODE</button>
       </div>
 
       {/* TO START ANALYSIS */}
@@ -149,7 +142,6 @@ export default function AiAnalysisPage() {
         </button>
       </div>
 
-      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }

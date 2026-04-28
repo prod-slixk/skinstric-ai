@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import PageWrapper from "@/components/PageWrapper";
 import CornerLines from "@/components/CornerLines";
 import DiamondButton from "@/components/DiamondButton";
-import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import { FiArrowLeft, FiCamera, FiRefreshCw, FiCheck } from "react-icons/fi";
 
@@ -21,8 +20,6 @@ export default function SelfiePage() {
   const [state, setState]             = useState<SelfieState>("idle");
   const [capturedUrl, setCapturedUrl] = useState<string | null>(null);
   const [error, setError]             = useState("");
-  const [showCodeModal, setShowCodeModal] = useState(false);
-
   const startCamera = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -94,10 +91,6 @@ export default function SelfiePage() {
           <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
           <img src="https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png" alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
-        <button
-          onClick={() => setShowCodeModal(true)}
-          style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "pointer", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}
-        >ENTER CODE</button>
       </div>
 
       {/* ── DIAMOND ── */}
@@ -239,8 +232,6 @@ export default function SelfiePage() {
         </div>
       )}
 
-      {/* ── ENTER CODE MODAL ── */}
-      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }

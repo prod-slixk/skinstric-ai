@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import EnterCodeModal from "@/components/EnterCodeModal";
 import { useTransitionRouter } from "@/hooks/useTransitionRouter";
 import PageWrapper from "@/components/PageWrapper";
 
@@ -10,8 +9,6 @@ const R_BRACKET = "https://skinstric-wandag.vercel.app/_next/static/media/Rectan
 
 export default function LandingPage() {
   const { push } = useTransitionRouter();
-  const [showCodeModal, setShowCodeModal] = useState(false);
-
   const headingRef       = useRef<HTMLHeadingElement>(null);
   const leftRef          = useRef<HTMLButtonElement>(null);
   const rightRef         = useRef<HTMLButtonElement>(null);
@@ -81,10 +78,6 @@ export default function LandingPage() {
           <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
           <img src={R_BRACKET} alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
-        <button
-          onClick={() => setShowCodeModal(true)}
-          style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "pointer", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}
-        >ENTER CODE</button>
       </div>
 
       {/* HERO — Figma: 128px, weight 300, tracking -0.07em, lineHeight 0.94, vertically centered */}
@@ -196,7 +189,6 @@ export default function LandingPage() {
         </button>
       </div>
 
-      {showCodeModal && <EnterCodeModal onClose={() => setShowCodeModal(false)} />}
     </PageWrapper>
   );
 }
