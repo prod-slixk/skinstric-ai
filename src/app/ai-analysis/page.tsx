@@ -135,7 +135,7 @@ export default function AiAnalysisPage() {
       {/* BACK */}
       <div style={{ position: "absolute", bottom: 40, left: 24, display: "flex", alignItems: "center", zIndex: 10 }}>
         <button onClick={() => push("/intro")} style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}>
-          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+          <div className="diam-pop" style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>

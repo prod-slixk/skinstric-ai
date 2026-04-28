@@ -139,7 +139,7 @@ export default function IntroPage() {
       {/* BOTTOM NAV — matches Figma: bottom ~80px */}
       <div style={{ position: "absolute", bottom: 40, left: 24, right: 24, display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 10 }}>
         <button onClick={handleBack} style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: "pointer", fontFamily: "inherit", padding: 0 }}>
-          <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+          <div className="diam-pop" style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
             <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
             <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%) rotate(180deg)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
           </div>
@@ -153,7 +153,7 @@ export default function IntroPage() {
             style={{ display: "flex", alignItems: "center", background: "none", border: "none", cursor: loading ? "not-allowed" : "pointer", fontFamily: "inherit", padding: 0, opacity: loading ? 0.5 : 1 }}
           >
             <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "0.05em", marginRight: 16, color: "#1A1B1C" }}>{loading ? "..." : "PROCEED"}</span>
-            <div style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
+            <div className="diam-pop" style={{ position: "relative", width: 44, height: 44, flexShrink: 0 }}>
               <div style={{ position: "absolute", inset: 0, border: "1px solid #1A1B1C", transform: "rotate(45deg)" }} />
               <span style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: 10, lineHeight: 1 }}>&#9654;</span>
             </div>

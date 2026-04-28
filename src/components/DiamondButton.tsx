@@ -22,9 +22,9 @@ export default function DiamondButton({
     if (disabled) return;
     gsap.to(diamondRef.current, {
       backgroundColor: "#1a1a1a",
-      scale: 1.08,
-      duration: 0.22,
-      ease: "power2.out",
+      scale: 1.20,
+      duration: 0.3,
+      ease: "back.out(1.5)",
     });
     gsap.to(iconRef.current, { color: "#ffffff", duration: 0.18 });
   };
@@ -34,7 +34,7 @@ export default function DiamondButton({
     gsap.to(diamondRef.current, {
       backgroundColor: "transparent",
       scale: 1,
-      duration: 0.22,
+      duration: 0.25,
       ease: "power2.out",
     });
     gsap.to(iconRef.current, { color: "#1a1a1a", duration: 0.18 });

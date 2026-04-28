@@ -101,6 +101,14 @@ body {
   .cluster-gallery { left: 55%; }
 }
 
+/* ── Nav diamond button pop — 1.20x back.out on hover ── */
+.diam-pop {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+button:hover .diam-pop {
+  transform: scale(1.20);
+}
+
 /* ── Intro: diamond sizes (matches reference exactly) ── */
 .intro-diamond-lg { width: 480px; height: 480px; }
 .intro-diamond-md { width: 400px; height: 400px; }
