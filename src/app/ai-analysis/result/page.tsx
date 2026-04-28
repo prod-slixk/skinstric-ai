@@ -162,6 +162,7 @@ export default function ResultPage() {
           <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
           <img src="https://skinstric-wandag.vercel.app/_next/static/media/Rectangle%202711.b2b3b291.png" alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
+        <button style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "default", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}>ENTER CODE</button>
       </div>
       <div style={{ padding: "0 24px 20px", flexShrink: 0, position: "relative", zIndex: 10 }}>
         <p style={{ fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "#1a1a1a", margin: "0 0 4px", fontWeight: 500 }}>A.I. ANALYSIS</p>

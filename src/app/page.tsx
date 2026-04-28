@@ -78,6 +78,7 @@ export default function LandingPage() {
           <span style={{ color: "rgba(26,27,28,0.51)", fontWeight: 600, fontSize: 14, margin: "0 6px" }}>INTRO</span>
           <img src={R_BRACKET} alt="]" width={5} height={19} style={{ width: 4, height: 17 }} />
         </div>
+        <button style={{ fontWeight: 600, fontSize: 10, letterSpacing: "0.1em", color: "#FCFCFC", background: "#1A1B1C", border: "none", cursor: "default", padding: "8px 16px", transform: "scale(0.8)", transformOrigin: "right center", marginRight: 16, fontFamily: "inherit" }}>ENTER CODE</button>
       </div>
 
       {/* HERO — Figma: 128px, weight 300, tracking -0.07em, lineHeight 0.94, vertically centered */}
