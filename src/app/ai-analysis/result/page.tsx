@@ -19,9 +19,9 @@ const CAT_LABELS: Record<Category, string> = { race: "RACE", age: "AGE", gender:
 const CATEGORIES: Category[] = ["race", "age", "gender"];
 
 function DonutChart({ percent }: { percent: number }) {
-  const size = 320;
+  const vbSize = 320;
   const strokeW = 10;
-  const radius = (size - strokeW * 2) / 2;
+  const radius = (vbSize - strokeW * 2) / 2;
   const circumference = 2 * Math.PI * radius;
   const circleRef = useRef<SVGCircleElement>(null);
 
@@ -36,12 +36,12 @@ function DonutChart({ percent }: { percent: number }) {
   }, [percent, circumference]);
 
   return (
-    <div style={{ position: "relative", width: size, height: size }}>
-      <svg width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="#d4d4d0" strokeWidth={strokeW} />
+    <div style={{ position: "relative", width: "min(320px, 80vw)", aspectRatio: "1 / 1" }}>
+      <svg viewBox={`0 0 ${vbSize} ${vbSize}`} width="100%" height="100%" style={{ display: "block", transform: "rotate(-90deg)" }}>
+        <circle cx={vbSize / 2} cy={vbSize / 2} r={radius} fill="none" stroke="#d4d4d0" strokeWidth={strokeW} />
         <circle
           ref={circleRef}
-          cx={size / 2} cy={size / 2} r={radius}
+          cx={vbSize / 2} cy={vbSize / 2} r={radius}
           fill="none" stroke="#1a1a1a" strokeWidth={strokeW}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -49,8 +49,8 @@ function DonutChart({ percent }: { percent: number }) {
         />
       </svg>
       <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ fontSize: "3rem", fontWeight: 200, color: "#1a1a1a", letterSpacing: "-0.02em", lineHeight: 1 }}>
-          {percent}<span style={{ fontSize: "1.3rem" }}>%</span>
+        <span style={{ fontSize: "clamp(1.6rem, 8vw, 3rem)", fontWeight: 200, color: "#1a1a1a", letterSpacing: "-0.02em", lineHeight: 1 }}>
+          {percent}<span style={{ fontSize: "clamp(0.9rem, 3vw, 1.3rem)" }}>%</span>
         </span>
       </div>
     </div>
@@ -70,22 +70,22 @@ function ResultSkeleton() {
         <div className="skeleton" style={{ width: 260, height: 52, marginBottom: 12 }} />
         <div className="skeleton" style={{ width: 180, height: 10 }} />
       </div>
-      <div style={{ flex: 1, display: "flex", padding: "0 24px", overflow: "hidden", minHeight: 0 }}>
-        <div style={{ width: 180, flexShrink: 0, display: "flex", flexDirection: "column", gap: 1, borderRight: "1px solid #d4d4d0" }}>
+      <div className="result-body">
+        <div className="result-left" style={{ gap: 1 }}>
           {[0, 1, 2].map(i => (
             <div key={i} className="skeleton" style={{ height: 72, marginBottom: i < 2 ? 1 : 0 }} />
           ))}
         </div>
-        <div style={{ flex: 1, background: "#ebebeb", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: "24px 32px" }}>
-          <div style={{ position: "relative", width: 240, height: 240 }}>
-            <div className="skeleton" style={{ width: 240, height: 240, borderRadius: "50%" }} />
+        <div className="result-center" style={{ alignItems: "center", justifyContent: "center", gap: 24 }}>
+          <div style={{ position: "relative", width: "min(240px, 70vw)", aspectRatio: "1 / 1" }}>
+            <div className="skeleton" style={{ width: "100%", height: "100%", borderRadius: "50%" }} />
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ width: 170, height: 170, borderRadius: "50%", background: "#ebebeb" }} />
+              <div style={{ width: "71%", height: "71%", borderRadius: "50%", background: "#ebebeb" }} />
             </div>
           </div>
           <div className="skeleton" style={{ width: 100, height: 14 }} />
         </div>
-        <div style={{ width: 300, flexShrink: 0, display: "flex", flexDirection: "column", borderLeft: "1px solid #d4d4d0" }}>
+        <div className="result-right">
           <div style={{ display: "flex", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid #1a1a1a" }}>
             <div className="skeleton" style={{ width: 40, height: 10 }} />
             <div className="skeleton" style={{ width: 90, height: 10 }} />
@@ -171,8 +171,8 @@ export default function ResultPage() {
         </h1>
         <p style={{ fontSize: 10, letterSpacing: "0.14em", textTransform: "uppercase", color: "#6b6b6b", margin: "8px 0 0", fontWeight: 400 }}>PREDICTED RACE &amp; AGE &amp; SEX</p>
       </div>
-      <div style={{ flex: 1, display: "flex", padding: "0 24px", overflow: "hidden", position: "relative", zIndex: 5, minHeight: 0 }}>
-        <div style={{ width: 180, flexShrink: 0, display: "flex", flexDirection: "column", borderRight: "1px solid #d4d4d0" }}>
+      <div className="result-body">
+        <div className="result-left">
           {CATEGORIES.map(cat => {
             const isActive = cat === selected;
             return (
@@ -195,13 +195,13 @@ export default function ResultPage() {
             );
           })}
         </div>
-        <div style={{ flex: 1, background: "#ebebeb", display: "flex", flexDirection: "column", padding: "24px 32px", minHeight: 0 }}>
+        <div className="result-center">
           <p style={{ fontSize: "1.35rem", fontWeight: 300, color: "#1a1a1a", margin: 0 }}>{cap(topLabel)}</p>
           <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <DonutChart key={`${selected}-${topLabel}`} percent={topPercent} />
           </div>
         </div>
-        <div style={{ width: 300, flexShrink: 0, display: "flex", flexDirection: "column", borderLeft: "1px solid #d4d4d0" }}>
+        <div className="result-right">
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 16px", borderBottom: "1px solid #1a1a1a", flexShrink: 0 }}>
             <span style={{ fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a", fontWeight: 600 }}>{CAT_LABELS[selected]}</span>
             <span style={{ fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: "#1a1a1a", fontWeight: 600 }}>A.I. CONFIDENCE</span>

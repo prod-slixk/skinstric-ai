@@ -81,18 +81,18 @@ export default function AiAnalysisPage() {
           {/* camera icon — ref: 136px desktop */}
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <img src={CAMERA_ICON} alt="Camera"
-              style={{ width: 136, height: 136, transition: "transform 0.7s ease-in-out" }}
+              className="cluster-icon-img"
+              style={{ transition: "transform 0.7s ease-in-out" }}
               onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.08)")}
               onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
             />
           </div>
 
-          {/* scan label — ref: md:top-[30.9%] md:right-[-12px] translate-y-[-20px] */}
-          <div style={{ position: "absolute", top: "30.9%", right: -12, transform: "translateY(-20px)", textAlign: "left" }}>
+          {/* scan label — hidden on mobile */}
+          <div className="cluster-label" style={{ position: "absolute", top: "30.9%", right: -12, transform: "translateY(-20px)", textAlign: "left" }}>
             <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap", marginTop: 4 }}>
               ALLOW A.I.<br />TO SCAN YOUR FACE
             </p>
-            {/* scan line — ref: md:right-[143px] md:top-[20px] */}
             <img src={SCAN_LINE} alt="" style={{ position: "absolute", right: 143, top: 20, width: 66, height: 59 }} />
           </div>
         </div>
@@ -109,18 +109,18 @@ export default function AiAnalysisPage() {
           {/* gallery icon */}
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <img src={GALLERY_ICON} alt="Gallery"
-              style={{ width: 136, height: 136, transition: "transform 0.7s ease-in-out" }}
+              className="cluster-icon-img"
+              style={{ transition: "transform 0.7s ease-in-out" }}
               onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.08)")}
               onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
             />
           </div>
 
-          {/* gallery label — ref: md:top-[70%] md:left-[17px] translate-y-[-10px] */}
-          <div style={{ position: "absolute", top: "70%", left: 17, transform: "translateY(-10px)", textAlign: "right" }}>
+          {/* gallery label — hidden on mobile */}
+          <div className="cluster-label" style={{ position: "absolute", top: "70%", left: 17, transform: "translateY(-10px)", textAlign: "right" }}>
             <p style={{ fontSize: 13, fontWeight: 400, lineHeight: "24px", whiteSpace: "nowrap", marginTop: 8 }}>
               ALLOW A.I.<br />ACCESS GALLERY
             </p>
-            {/* gallery line — ref: md:left-[120px] md:bottom-[39px] */}
             <img src={GALLERY_LINE} alt="" style={{ position: "absolute", left: 120, bottom: 39, width: 66, height: 59 }} />
           </div>
         </div>
