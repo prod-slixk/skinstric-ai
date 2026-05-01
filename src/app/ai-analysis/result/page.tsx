@@ -36,7 +36,7 @@ function DonutChart({ percent }: { percent: number }) {
   }, [percent, circumference]);
 
   return (
-    <div style={{ position: "relative", width: "min(320px, 80vw)", aspectRatio: "1 / 1" }}>
+    <div className="donut-chart" style={{ position: "relative", aspectRatio: "1 / 1" }}>
       <svg viewBox={`0 0 ${vbSize} ${vbSize}`} width="100%" height="100%" style={{ display: "block", transform: "rotate(-90deg)" }}>
         <circle cx={vbSize / 2} cy={vbSize / 2} r={radius} fill="none" stroke="#d4d4d0" strokeWidth={strokeW} />
         <circle
@@ -77,7 +77,7 @@ function ResultSkeleton() {
           ))}
         </div>
         <div className="result-center" style={{ alignItems: "center", justifyContent: "center", gap: 24 }}>
-          <div style={{ position: "relative", width: "min(240px, 70vw)", aspectRatio: "1 / 1" }}>
+          <div className="donut-chart" style={{ position: "relative", aspectRatio: "1 / 1" }}>
             <div className="skeleton" style={{ width: "100%", height: "100%", borderRadius: "50%" }} />
             <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
               <div style={{ width: "71%", height: "71%", borderRadius: "50%", background: "#ebebeb" }} />
