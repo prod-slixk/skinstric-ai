@@ -72,20 +72,22 @@ body {
 /* ── AI Analysis: responsive cluster positioning (matches reference) ── */
 .cluster-camera {
   position: absolute;
-  top: 50%;
+  /* mobile: stacked vertically — camera above center */
+  top: calc(50% - 90px);
+  left: 50%;
   width: 160px;
   height: 160px;
-  left: 50%;
-  transform: translate(-100%, -50%);
+  transform: translate(-50%, -50%);
   cursor: pointer;
 }
 .cluster-gallery {
   position: absolute;
-  top: 50%;
+  /* mobile: stacked vertically — gallery below center */
+  top: calc(50% + 90px);
+  left: 50%;
   width: 160px;
   height: 160px;
-  left: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   cursor: pointer;
 }
 @media (min-width: 768px) {

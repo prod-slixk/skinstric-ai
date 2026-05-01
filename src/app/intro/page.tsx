@@ -13,7 +13,7 @@ const DIAMOND_SMALL  = "https://skinstric-wandag.vercel.app/_next/static/media/D
 type Step = "name" | "location";
 const PLACEHOLDERS: Record<Step, string> = {
   name:     "Introduce Yourself",
-  location: "Where are you from?",
+  location: "Your city name",
 };
 function isValid(v: string) { return v.trim().length >= 2 && !/\d/.test(v); }
 
