@@ -91,8 +91,9 @@ body {
   cursor: pointer;
 }
 @media (min-width: 768px) {
-  .cluster-camera  { width: 482px; height: 482px; left: 55%; }
-  .cluster-gallery { width: 482px; height: 482px; left: 45%; }
+  /* Restore original side-by-side desktop layout */
+  .cluster-camera  { width: 482px; height: 482px; left: 55%; top: 50%; transform: translate(-100%, -50%); }
+  .cluster-gallery { width: 482px; height: 482px; left: 45%; top: 50%; transform: translateY(-50%); }
 }
 @media (min-width: 1024px) {
   .cluster-camera  { left: 50%; }
